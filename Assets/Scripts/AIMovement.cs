@@ -2,17 +2,18 @@ using UnityEngine;
 
 public class AIPaddle : MonoBehaviour
 {
-    [SerializeField] private Transform _ball;
     [SerializeField] private float _speed = 10f;
 
+    private Transform _ball;
     private float _minY;
     private float _maxY;
 
     private void Start()
     {
-        float cameraSize = Camera.main.orthographicSize;
-        float halfPaddleHeight = transform.localScale.y / 2f;
+        _ball = GameManager.Instance.Ball.transform;
 
+        float cameraSize = GameManager.Instance.CameraSize;
+        float halfPaddleHeight = transform.localScale.y / 2f;
         _minY = halfPaddleHeight - cameraSize;
         _maxY = cameraSize - halfPaddleHeight;
     }

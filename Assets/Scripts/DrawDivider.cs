@@ -6,7 +6,7 @@ public class DrawDivider : MonoBehaviour
 
     private void Start()
     {
-        float cameraSize = Camera.main.orthographicSize;
+        float cameraSize = GameManager.Instance.CameraSize;
 
         var position = Vector3.zero;
         for (float yPos = -cameraSize + 0.2f; yPos < cameraSize; yPos += 0.4f)

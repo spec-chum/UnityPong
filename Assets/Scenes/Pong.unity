@@ -160,8 +160,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 86317991}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.691822, y: 0.51168454, z: -0.04885664}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -286,7 +286,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 228060842}
-  - component: {fileID: 228060843}
   m_Layer: 0
   m_Name: Score Manager
   m_TagString: Untagged
@@ -312,20 +311,6 @@ Transform:
   m_Father: {fileID: 1496923760}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &228060843
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 228060841}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4aa61288202f5df43a3617a3e683c3cf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _playerScoreText: {fileID: 525255809}
-  _aiScoreText: {fileID: 1866602872}
 --- !u!1 &236313972
 GameObject:
   m_ObjectHideFlags: 0
@@ -1302,7 +1287,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &846661365
 MonoBehaviour:
@@ -1316,7 +1301,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f546c3a61940b7d46bfcbb6d4e7cc6e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _ball: {fileID: 1310869750}
   _speed: 5
 --- !u!1 &851989174
 GameObject:
@@ -1822,6 +1806,56 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1293682369
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1293682371}
+  - component: {fileID: 1293682370}
+  m_Layer: 0
+  m_Name: Game Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1293682370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1293682369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ae026ecc6d4f7a43a2964713e559ec7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Camera: {fileID: 519420031}
+  Ball: {fileID: 1310869747}
+  Player: {fileID: 1396533940}
+  Ai: {fileID: 846661361}
+  _playerScoreText: {fileID: 525255809}
+  _aiScoreText: {fileID: 1866602872}
+--- !u!4 &1293682371
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1293682369}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1310869747
 GameObject:
   m_ObjectHideFlags: 0
@@ -1852,8 +1886,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73e4f77f13b69404e9c5b25f91617b28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _player: {fileID: 1396533942}
-  _ai: {fileID: 846661363}
   _speed: 10
 --- !u!212 &1310869749
 SpriteRenderer:
@@ -1920,7 +1952,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1344423158
 GameObject:
@@ -2342,7 +2374,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1396533944
 MonoBehaviour:
@@ -2368,7 +2400,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f546c3a61940b7d46bfcbb6d4e7cc6e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _ball: {fileID: 1310869750}
   _speed: 5
 --- !u!1 &1496923759
 GameObject:
@@ -2394,14 +2425,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1496923759}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.691822, y: -0.51168454, z: 0.04885664}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 86317993}
   - {fileID: 228060842}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1536014762
 GameObject:

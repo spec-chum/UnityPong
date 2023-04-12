@@ -2,47 +2,62 @@ using UnityEngine;
 
 public class BallMovement : MonoBehaviour
 {
-    [SerializeField] private SpriteRenderer _player;
-    [SerializeField] private SpriteRenderer _ai;
-    [SerializeField] private float _speed = 5;
+    private const float InitialSpeed = 10;
 
-    private ScoreManager _scoreManager;
     private SpriteRenderer _ballRenderer;
+    private SpriteRenderer _playerRenderer;
+    private SpriteRenderer _aiRenderer;
     private Vector2 _velocity;
     private Vector2 _screenSize;
     private Bounds _ballBounds;
+    private float _speed;
 
     private void Start()
     {
-        // Calculate the viewport's limits in World Space
-        _screenSize = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, Screen.height));
-
         // Cache items
-        _scoreManager = FindObjectOfType<ScoreManager>();
         _ballRenderer = GetComponent<SpriteRenderer>();
+        _playerRenderer = GameManager.Instance.Player.GetComponent<SpriteRenderer>();
+        _aiRenderer = GameManager.Instance.Ai.GetComponent<SpriteRenderer>();
+        _screenSize = GameManager.Instance.ScreenSizeInWorldSpace;
+
+        Reset();
+    }
+
+    private void Reset()
+    {
+        transform.localPosition = Vector3.zero;
+        _speed = InitialSpeed;
 
         // Set initial velocity and clamp to +/-22.5 degrees
         float angle = Random.Range(-Mathf.PI / 8, Mathf.PI / 8);
-        _velocity.x = _speed * Mathf.Cos(angle) * Mathf.Sign(-_velocity.x);
+        _velocity.x = _speed * Mathf.Cos(angle);
         _velocity.y = _speed * Mathf.Sin(angle);
     }
 
     private void Update()
     {
-        Vector2 position = transform.localPosition;
-
         _ballBounds = _ballRenderer.bounds;
+
+        Vector2 position = transform.localPosition;
+        TestScreenEdgeCollision(ref position);
+        TestPaddleCollision(ref position);
+
+        transform.localPosition = (Vector3)(position + (_velocity * Time.deltaTime));
+    }
+
+    private void TestScreenEdgeCollision(ref Vector2 position)
+    {
         if (_ballBounds.min.x < -_screenSize.x)
         {
-            _scoreManager.AIScore++;
-            position.x = -_screenSize.x + _ballBounds.extents.x;
-            _velocity.x *= -1;
+            GameManager.Instance.AIScore++;
+            position = Vector2.zero;
+            Reset();
         }
         else if (_ballBounds.max.x > _screenSize.x)
         {
-            _scoreManager.PlayerScore++;
-            position.x = _screenSize.x - _ballBounds.extents.x;
-            _velocity.x *= -1;
+            GameManager.Instance.PlayerScore++;
+            position = Vector2.zero;
+            Reset();
         }
 
         if (_ballBounds.min.y < -_screenSize.y)
@@ -55,19 +70,20 @@ public class BallMovement : MonoBehaviour
             position.y = _screenSize.y - _ballBounds.extents.y;
             _velocity.y *= -1;
         }
+    }
 
-        if (_ballBounds.Intersects(_player.bounds))
+    private void TestPaddleCollision(ref Vector2 position)
+    {
+        if (_ballBounds.Intersects(_playerRenderer.bounds))
         {
-            position.x = _player.bounds.max.x + _ballBounds.extents.x;
-            BounceOffPaddle(_player);
+            position.x = _playerRenderer.bounds.max.x + _ballBounds.extents.x;
+            BounceOffPaddle(_playerRenderer);
         }
-        else if (_ballBounds.Intersects(_ai.bounds))
+        else if (_ballBounds.Intersects(_aiRenderer.bounds))
         {
-            position.x = _ai.bounds.min.x - _ballBounds.extents.x;
-            BounceOffPaddle(_ai);
+            position.x = _aiRenderer.bounds.min.x - _ballBounds.extents.x;
+            BounceOffPaddle(_aiRenderer);
         }
-
-        transform.localPosition = (Vector3)(position + (_velocity * Time.deltaTime));
     }
 
     private void BounceOffPaddle(SpriteRenderer paddle)

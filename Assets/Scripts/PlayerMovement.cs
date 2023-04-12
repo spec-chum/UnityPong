@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
-        float cameraSize = Camera.main.orthographicSize;
+        float cameraSize = GameManager.Instance.Camera.orthographicSize;
         float halfPaddleHeight = transform.localScale.y / 2f;
 
         _minY = halfPaddleHeight - cameraSize;
@@ -16,10 +16,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        var newPosition = transform.localPosition;
-        var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        newPosition.y = Mathf.Clamp(mousePos.y, _minY, _maxY);
-
-        transform.localPosition = newPosition;
+        var newPos = transform.localPosition;
+        var mousePos = GameManager.Instance.Camera.ScreenToWorldPoint(Input.mousePosition);
+        newPos.y = Mathf.Clamp(mousePos.y, _minY, _maxY);
+        transform.localPosition = newPos;
     }
 }
